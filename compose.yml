@@ -2,6 +2,9 @@ name: infra
 
 # Based on SigNoz Foundry v0.2.17's Docker Compose defaults.
 networks:
+  dev-infra:
+    name: dev-infra
+    external: true
   signoz-network:
     name: signoz-network
 
@@ -24,6 +27,9 @@ services:
       - SIGNOZ_OTEL_COLLECTOR_TIMEOUT=10m
     image: docker.io/signoz/signoz-otel-collector:latest
     networks:
+      dev-infra:
+        aliases:
+          - signoz-ingester
       signoz-network:
         aliases:
           - signoz-ingester
